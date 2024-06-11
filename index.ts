@@ -16,6 +16,8 @@ app.get('/', (req, res) => {
     res.send("Hello, World!");
 });
 
+app.listen(process.env.PORT, () => console.log("Server is live."));
+
 app.get('/answer-today', async (req, res) => {
     const today = await actualWordToday();
     const answer = {
