@@ -7,12 +7,14 @@ const app = express();
 // For testing purposes;
 var allowCrossDomain = function(req: any, res: any, next: any) {
     const origin = req.get('origin');
-    console.log(origin);
+
     if ('http://localhost:3001' === origin) {
         res.header('Access-Control-Allow-Origin', "http://localhost:3001");
-    } else if ('http://localhost:3000' === origin) {
+    } 
+    if ('http://localhost:3000' === origin) {
         res.header('Access-Control-Allow-Origin', "http://localhost:3000");
-    } else if ('https://m-peeler-wordle.vercel.app' === origin) {
+    } 
+    if ('https://m-peeler-wordle.vercel.app' === origin) {
         res.header('Access-Control-Allow-Origin', "https://m-peeler-wordle.vercel.app");
     }
     res.header('Access-Control-Allow-Methods', 'GET,POST');
@@ -94,6 +96,7 @@ app.get('/compare', async (req, res) => {
         resp = compareGuess(actual, guess);
     }
 
+    console.log(resp);
     res.send(resp);
 })
 
