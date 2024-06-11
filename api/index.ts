@@ -8,14 +8,11 @@ const app = express();
 var allowCrossDomain = function(req: any, res: any, next: any) {
     const origin = req.get('origin');
 
-    if ('http://localhost:3001' === origin) {
-        res.header('Access-Control-Allow-Origin', "http://localhost:3001");
-    } 
-    if ('http://localhost:3000' === origin) {
-        res.header('Access-Control-Allow-Origin', "http://localhost:3000");
-    } 
-    if ('https://m-peeler-wordle.vercel.app' === origin) {
-        res.header('Access-Control-Allow-Origin', "https://m-peeler-wordle.vercel.app");
+    if ('http://localhost:3001' === origin 
+        || 'http://localhost:3000' === origin
+        || 'https://m-peeler-wordle.vercel.app' === origin
+    ) {
+        res.header('Access-Control-Allow-Origin', origin);
     }
     res.header('Access-Control-Allow-Methods', 'GET,POST');
     express.json()(req, res, next);
