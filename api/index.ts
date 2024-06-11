@@ -3,7 +3,7 @@ import { readFileSync, writeFileSync } from 'fs';
 
 const app = express();
 
-// For testing purposes
+// For testing purposes;
 var allowCrossDomain = function(req: any, res: any, next: any) {
     res.header('Access-Control-Allow-Origin', "http://localhost:3001");
     res.header('Access-Control-Allow-Methods', 'GET,POST');
