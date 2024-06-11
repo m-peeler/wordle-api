@@ -89,7 +89,7 @@ app.get('/compare', async (req, res) => {
 })
 
 async function actualWordToday() : Promise<string> {
-    const localCache = './actual_today.json';
+    const localCache = '../actual_today.json';
     const today = new Date(Date.now());
 
     const year = today.toLocaleString('en-US', {timeZone: "America/New_York", year: 'numeric'});
