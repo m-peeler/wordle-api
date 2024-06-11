@@ -1,3 +1,3 @@
 import app from '.';
 
-app.listen('/api', () => console.log('Server is alive.'));
+app.listen(process.env.PORT, () => console.log('Server is alive.'));
