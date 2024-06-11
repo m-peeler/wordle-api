@@ -1,5 +1,6 @@
 import express from 'express';
 import { readFileSync, writeFileSync } from 'fs';
+import path from 'path';
 
 const app = express();
 
@@ -89,7 +90,7 @@ app.get('/compare', async (req, res) => {
 })
 
 async function actualWordToday() : Promise<string> {
-    const localCache = '../actual_today.json';
+    const localCache = path.join(process.cwd(), 'actual_today.json');
     const today = new Date(Date.now());
 
     const year = today.toLocaleString('en-US', {timeZone: "America/New_York", year: 'numeric'});
