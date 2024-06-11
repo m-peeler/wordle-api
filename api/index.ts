@@ -10,6 +10,8 @@ var allowCrossDomain = function(req: any, res: any, next: any) {
     console.log(origin);
     if ('http://localhost:3001' === origin) {
         res.header('Access-Control-Allow-Origin', "http://localhost:3001");
+    } else if ('http://localhost:3000' === origin) {
+        res.header('Access-Control-Allow-Origin', "http://localhost:3000");
     } else if ('https://m-peeler-wordle.vercel.app' === origin) {
         res.header('Access-Control-Allow-Origin', "https://m-peeler-wordle.vercel.app");
     }
@@ -96,7 +98,6 @@ app.get('/compare', async (req, res) => {
 })
 
 async function actualWordToday() : Promise<string> {
-    const localCache = path.join(process.cwd(), 'actual_today.json');
     const today = new Date(Date.now());
 
     const year = today.toLocaleString('en-US', {timeZone: "America/New_York", year: 'numeric'});
@@ -104,13 +105,9 @@ async function actualWordToday() : Promise<string> {
     const day = today.toLocaleString('en-US', {timeZone: 'America/New_York', day: '2-digit'});
     const date = `${year}-${month}-${day}`;
 
-    const cache = JSON.parse(readFileSync(localCache).toString());
-    if (date in cache && typeof cache[date] === 'string') return cache[date];
-
     const link = `https://www.nytimes.com/svc/wordle/v2/${year}-${month}-${day}.json`;
     const resp = await fetch(link);
     const answer = await resp.json();
-    writeFileSync(localCache, `{ "${date}": "${answer.solution}"}`);
 
     return answer.solution;
 }
